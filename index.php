@@ -49,6 +49,11 @@
                         <span class="error" id="error_quantity"></span>
                     </div>
 
+                    <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" id="validate" name="validate" checked>
+                        <label class="form-check-label" for="validate">Validate</label>
+                    </div>
+
                     <div class="d-flex gap-2">
                         <button type="submit" class="btn btn-primary w-100" id="generateBtn">⚙️ Generate</button>
                         <a href="index.php" class="btn btn-outline-secondary w-100">🧹 Clear</a>
@@ -57,11 +62,10 @@
 
                 <?php if (isset($_GET['success']) && isset($_GET['file'])): ?>
                 <div class="alert alert-success mt-4 text-center">
-                ✅ Phone numbers generated successfully.<br>
-                <a href="<?= htmlspecialchars($_GET['file']) ?>" class="btn btn-success btn-sm mt-2" download>⬇️ Download CSV</a>
+                    ✅ Phone numbers generated successfully.<br>
+                    <a href="<?= htmlspecialchars($_GET['file']) ?>" class="btn btn-success btn-sm mt-2" download>⬇️ Download CSV</a>
                 </div>
                 <?php endif; ?>
-
             </div>
         </div>
     </div>
@@ -75,25 +79,27 @@
             const areaCode = document.getElementById("area_code").value.trim();
             const digitCount = document.getElementById("digit_count").value.trim();
             const quantity = document.getElementById("quantity").value.trim();
-            if (!/^\+?\d{1,4}$/.test(countryCode)) 
-            {
+
+            if (!/^\+?\d{1,4}$/.test(countryCode)) {
                 document.getElementById("error_country_code").textContent = "Enter valid country code (e.g., +91)";
                 isValid = false;
             }
 
-            if (!/^\d{1,5}$/.test(areaCode)) 
-            {
+            if (!/^\d{1,5}$/.test(areaCode)) {
                 document.getElementById("error_area_code").textContent = "Enter a valid area/mobile code";
                 isValid = false;
             }
+
             if (!/^\d+$/.test(digitCount) || digitCount < 1 || digitCount > 12) {
                 document.getElementById("error_digit_count").textContent = "Enter a number between 1 and 12";
                 isValid = false;
             }
+
             if (!/^\d+$/.test(quantity) || quantity < 1 || quantity > 100000) {
                 document.getElementById("error_quantity").textContent = "Enter a number between 1 and 100000";
                 isValid = false;
             }
+
             if (isValid) {
                 const generateBtn = document.getElementById("generateBtn");
                 generateBtn.textContent = "⚙️ Generating...";
