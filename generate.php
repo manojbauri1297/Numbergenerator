@@ -85,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 function isValidPhoneNumber($number) {
     $username = 'softmuneeb';
-    $password = 'Validate123@';
+    $password = 'Onlygod123@';
     $cleanNumber = preg_replace('/\D/', '', $number);
 
     $url = "https://api.numberportabilitylookup.com/npl?user=" . urlencode($username)
